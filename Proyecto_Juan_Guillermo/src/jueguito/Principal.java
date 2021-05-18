@@ -20,6 +20,7 @@ public class Principal {
 		int opcion;
 		System.out.println("¿Qué personaje quieres elegir?");
 		System.out.println("\t1. Guerrero\n\t2. Mago\n\t3. Tanque");
+		comprobarEntero();
 		opcion = sc.nextInt();
 		switch (opcion) {
 		case 1:
@@ -37,6 +38,15 @@ public class Principal {
 			t.setEstadisticas();
 			clases.add(t);
 			break;
+		default:
+			System.out.println("Error, elija una opcion correcta.");
 		} // Del switch
 	} // Del elegirClase
+
+	private static void comprobarEntero() {
+		while (!sc.hasNextInt()) {
+			System.out.println("Eso no es un numero entero. Introduzca uno de nuevo: ");
+			sc.next();
+		} // Del while
+	} // Del comprobarEntero
 } // Del class
