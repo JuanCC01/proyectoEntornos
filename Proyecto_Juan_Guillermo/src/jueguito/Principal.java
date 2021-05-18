@@ -3,8 +3,6 @@ package jueguito;
 public class Principal {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
-
-}
+	} // Del main
+} // Del class
