@@ -1,8 +1,6 @@
 package jueguito;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.util.*;
 import personajes.*;
 
 public class Principal {
