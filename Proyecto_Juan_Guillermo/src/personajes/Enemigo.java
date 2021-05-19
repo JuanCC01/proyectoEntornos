@@ -23,7 +23,7 @@ public class Enemigo extends Base {
 	/**
 	 * Método que devuelve la clase.
 	 * 
-	 * @retun nombre - el nombre del enemigo.
+	 * @return nombre - el nombre del enemigo.
 	 */
 	public String getNombre() {
 		return nombre;

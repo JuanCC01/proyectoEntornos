@@ -23,7 +23,7 @@ public class Tanque extends Base {
 	/**
 	 * Método que devuelve la clase.
 	 * 
-	 * @retun clase - la clase del personaje.
+	 * @return clase - la clase del personaje.
 	 */
 	public String getClase() {
 		return clase;

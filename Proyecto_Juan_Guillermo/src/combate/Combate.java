@@ -14,7 +14,7 @@ public class Combate {
 	/**
 	 * Método que comprueba la prioridad de los turnos en función de la velocidad.
 	 * 
-	 * @param alidado Personaje con el que estamos jugando.
+	 * @param aliado Personaje con el que estamos jugando.
 	 * @param enemigo Enemigo contra el que nos enfrentamos.
 	 * @return vasPrimero - true si somos nosotros los más rárpidos, flase en caso
 	 *         contrario.

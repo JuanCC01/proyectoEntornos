@@ -60,6 +60,8 @@ public class Principal {
 	/**
 	 * Método que se encarga de crear un objeto de la clase Enemigo con unas
 	 * estadísticas nuevas.
+	 * 
+	 * @return e - Enemigo ya generado.
 	 */
 	private static Enemigo generarEnemigo() {
 		Enemigo e = new Enemigo();
@@ -133,6 +135,8 @@ public class Principal {
 	/**
 	 * Método en el cual se desarrolla el combate. Posee un menú con las diferentes
 	 * opciones de combate.
+	 * 
+	 * @param enemigo Enemigo con el que combates.
 	 */
 	private static void menuCombate(Enemigo enemigo) {
 		Combate combate = new Combate();
