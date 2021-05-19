@@ -20,7 +20,7 @@ public class EntradaSalida {
 	 */
 	public void escribir(String aux) {
 		try {
-			FileWriter escribir = new FileWriter("Archivos/datosJugadores.txt", true);
+			FileWriter escribir = new FileWriter("datosJugadores.txt", true);
 			escribir.write(aux);
 			escribir.close();
 			System.out.println("Escrito correctamente.");
@@ -35,7 +35,7 @@ public class EntradaSalida {
 	 */
 	public void leer() {
 		try {
-			File fichero = new File("Archivos/datosJugadores.txt");
+			File fichero = new File("datosJugadores.txt");
 			Scanner leer = new Scanner(fichero);
 			while (leer.hasNextLine()) {
 				String datos = leer.nextLine();
