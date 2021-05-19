@@ -132,6 +132,10 @@ public class Base {
 		this.velocidad = velocidad;
 	} // Del setVelocidad
 
+	/**
+	 * Método utilizado para poder poner de nuevo las estadisticas base de los
+	 * personajes.
+	 */
 	public void resetearEstadisticas() {
 		vida = 25.0;
 		mp = 25.0;
@@ -141,12 +145,18 @@ public class Base {
 		velocidad = 3;
 	} // Del resetearEstadisticas
 
-	public void aumentarEstadisticas(int nivel) {
+	/**
+	 * Método que aumenta las estadísticas de los personajes por el nivel pasado por
+	 * parámetro.
+	 * 
+	 * @param nivel Nivel de la ronda en la que estamos. Si es un enemigo será un
+	 *              poco más alto.
+	 */
+	public void aumentarEstadisticas(double nivel) {
 		vida = getVida() * nivel;
 		mp = getMp() * nivel;
 		ataque = getAtaque() * nivel;
 		defensa = getDefensa() * nivel;
 		magia = getMagia() * nivel;
-		velocidad = getVelocidad() * nivel;
 	} // Del aumentarEstadisticas
 } // Del class

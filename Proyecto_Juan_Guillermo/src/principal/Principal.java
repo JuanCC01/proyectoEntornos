@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.*;
 import combate.*;
 import personajes.*;
+import entradaSalida.*;
 
 /**
  * Clase Principal.
@@ -17,11 +18,13 @@ public class Principal {
 	private static Scanner sc = new Scanner(System.in);
 	private static ArrayList<Object> clases = new ArrayList<Object>();
 	private static boolean huir = true;
+	private static String datosJugador;
+	private static int contador = 1;
+	private static EntradaSalida io = new EntradaSalida();
 
 	public static void main(String[] args) {
 
 		Enemigo enemigo = null;
-		int contador = 1;
 
 		elegirClase();
 		System.out.println("Esta es la clase que has elegido:\n\t" + clases.get(0).toString());
@@ -38,6 +41,9 @@ public class Principal {
 			enemigo = generarEnemigo();
 			subirNivel(contador, enemigo);
 		} while (huir);
+		if (!huir) {
+			exportarDatos();
+		} // Del if
 		sc.close();
 	} // Del main
 
@@ -175,6 +181,7 @@ public class Principal {
 						"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
 				if (((Base) clases.get(0)).getVida() <= 0) {
 					System.out.println("Has perdido.");
+					exportarDatos();
 					System.exit(0);
 				} // Del if
 				mostrarRepeticion();
@@ -202,6 +209,7 @@ public class Principal {
 			} // Del if
 			else {
 				System.out.println("Has perdido.");
+				exportarDatos();
 				System.exit(0);
 			} // Del else
 		} // Del else
@@ -227,6 +235,7 @@ public class Principal {
 						"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
 				if (((Base) clases.get(0)).getVida() <= 0) {
 					System.out.println("Has perdido.");
+					exportarDatos();
 					System.exit(0);
 				} // Del if
 				mostrarRepeticion();
@@ -254,6 +263,7 @@ public class Principal {
 			} // Del if
 			else {
 				System.out.println("Has perdido.");
+				exportarDatos();
 				System.exit(0);
 			} // Del else
 		} // Del else
@@ -286,6 +296,12 @@ public class Principal {
 		return formato;
 	} // Del mostrarDosDecimales
 
+	/**
+	 * Método que sirve para subir de nivel tanto al personaje como al enemigo.
+	 * 
+	 * @param nivel Nivel de la ronda en la que estamos.
+	 * @param aux   Personaje o enemigo al que queremos subir de nivel.
+	 */
 	private static void subirNivel(int nivel, Object aux) {
 		if (aux instanceof Guerrero) {
 			((Guerrero) aux).resetearEstadisticas();
@@ -303,7 +319,42 @@ public class Principal {
 			((Tanque) aux).aumentarEstadisticas(nivel);
 		} // Del else-if
 		else {
-			((Enemigo) aux).aumentarEstadisticas(nivel);
+			((Enemigo) aux).aumentarEstadisticas(nivel + 0.2);
 		} // Del else
 	} // Del subirNivel
+
+	/**
+	 * Método que genera el String con los datos que luego escribiremos en el
+	 * archivo de records.
+	 * 
+	 * @return datosJugador - String con el nombre, el número de rondas y el
+	 *         personaje que ha utilizado el jugador.
+	 */
+	private static String pedirDatos() {
+		String nombre;
+		System.out.println("Escriba su nombre: ");
+		nombre = sc.next();
+		System.out.println();
+		return datosJugador = "Jugador: " + nombre + "\tNúmero de rondas: " + (contador - 1) + "\n\tPersonaje: "
+				+ clases.get(0).toString() + "\n";
+	} // Del pedirDatos
+
+	/**
+	 * Método que realiza la secuencia de acciones para escribir el fichero con los
+	 * datos de los jugadores y posteriormente leerlo si es oportuno.
+	 */
+	private static void exportarDatos() {
+		char respuesta;
+		pedirDatos();
+		io.escribir(datosJugador);
+		System.out.println("¿Quiere revisar el histórico de jugadores? (S/N)");
+		respuesta = sc.next().toUpperCase().charAt(0);
+		System.out.println();
+		if (respuesta == 'S') {
+			System.out.println("Se va a proceder a leer el archivo");
+			io.leer();
+		} // Del if
+		System.out.println("Fin del programa.");
+		sc.close();
+	} // Del exportarDatos
 } // Del class
