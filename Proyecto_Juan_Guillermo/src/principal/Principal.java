@@ -1,4 +1,4 @@
-package jueguito;
+package principal;
 
 import java.util.*;
 import personajes.*;
@@ -25,19 +25,24 @@ public class Principal {
 			Guerrero c = new Guerrero();
 			c.setEstadisticas();
 			clases.add(c);
+			System.out.println("Has elegido la clase Guerrero.");
 			break;
 		case 2:
 			Mago m = new Mago();
 			m.setEstadisticas();
 			clases.add(m);
+			System.out.println("Has elegido la clase Mago.");
 			break;
 		case 3:
 			Tanque t = new Tanque();
 			t.setEstadisticas();
 			clases.add(t);
+			System.out.println("has elegido la clase Tanque.");
 			break;
 		default:
 			System.out.println("Error, elija una opcion correcta.");
+			System.out.println("\t1. Guerrero\n\t2. Mago\n\t3. Tanque");
+			break;
 		} // Del switch
 	} // Del elegirClase
 
