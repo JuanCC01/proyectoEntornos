@@ -53,7 +53,7 @@ public class Mago extends Base {
 	 * @return mp - puntos mágicos modificados.
 	 */
 	public double modificarMp() {
-		return mp = getMp() * 1.5;
+		return mp = getMp() * 1.15;
 	} // Del modificarMp
 
 	/**
@@ -71,7 +71,7 @@ public class Mago extends Base {
 	 * @return velocidad - velocidad modificada.
 	 */
 	public double modificarVelocidad() {
-		return velocidad = getVelocidad() * 1.25;
+		return velocidad = getVelocidad() * 1.1;
 	} // Del modificarVelocidad
 
 	/**
@@ -80,19 +80,19 @@ public class Mago extends Base {
 	 * @return magia - magia modificada.
 	 */
 	public double modificarMagia() {
-		return magia = getMagia() * 1.75;
+		return magia = getMagia() * 1.35;
 	} // Del modificarMagia
 
 	/**
 	 * Método que llama al resto de métodos para modificar todas las estadísticas.
 	 */
-	public void generarEstadísticas() {
+	public void generarEstadisticas() {
 		modificarDefensa();
 		modificarMp();
 		modificarAtaque();
 		modificarMagia();
 		modificarVelocidad();
-	} // Del generarEstadísticas
+	} // Del generarEstadisticas
 
 	@Override
 	public String toString() {

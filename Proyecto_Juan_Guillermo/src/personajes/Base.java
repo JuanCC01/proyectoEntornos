@@ -131,4 +131,22 @@ public class Base {
 	public void setVelocidad(double velocidad) {
 		this.velocidad = velocidad;
 	} // Del setVelocidad
+
+	public void resetearEstadisticas() {
+		vida = 25.0;
+		mp = 25.0;
+		ataque = 10;
+		defensa = 10;
+		magia = 10;
+		velocidad = 3;
+	} // Del resetearEstadisticas
+
+	public void aumentarEstadisticas(int nivel) {
+		vida = getVida() * nivel;
+		mp = getMp() * nivel;
+		ataque = getAtaque() * nivel;
+		defensa = getDefensa() * nivel;
+		magia = getMagia() * nivel;
+		velocidad = getVelocidad() * nivel;
+	} // Del aumentarEstadisticas
 } // Del class

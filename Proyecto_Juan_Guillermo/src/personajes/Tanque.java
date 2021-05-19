@@ -53,7 +53,7 @@ public class Tanque extends Base {
 	 * @return ataque - ataque modificado.
 	 */
 	public double modificarAtaque() {
-		return ataque = getAtaque() * 1.25;
+		return ataque = getAtaque() * 1.15;
 	} // Del modificarAtaque
 
 	/**
@@ -62,7 +62,7 @@ public class Tanque extends Base {
 	 * @return vida - vida modificada.
 	 */
 	public double modificarVida() {
-		return vida = getVida() * 1.5;
+		return vida = getVida() * 1.35;
 	} // Del modificarVida
 
 	/**
@@ -71,7 +71,7 @@ public class Tanque extends Base {
 	 * @return defensa - defensa modificada.
 	 */
 	public double modificarDefensa() {
-		return defensa = getDefensa() * 1.5;
+		return defensa = getDefensa() * 1.25;
 	} // Del modificarDefensa
 
 	/**
@@ -89,20 +89,20 @@ public class Tanque extends Base {
 	 * @return velocidad - velocidad modificada.
 	 */
 	public double modificarVelocidad() {
-		return velocidad = getVelocidad() * 0.75;
+		return velocidad = getVelocidad() * 0.85;
 	} // Del modificarVelocidad
 
 	/**
 	 * Método que llama al resto de métodos para modificar todas las estadísticas.
 	 */
-	public void generarEstadísticas() {
+	public void generarEstadisticas() {
 		modificarMp();
 		modificarDefensa();
 		modificarVida();
 		modificarAtaque();
 		modificarVelocidad();
 		modificarMagia();
-	} // Del generarEstadísticas
+	} // Del generarEstadisticas
 
 	@Override
 	public String toString() {

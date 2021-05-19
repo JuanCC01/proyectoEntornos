@@ -1,7 +1,8 @@
 package principal;
 
+import java.text.DecimalFormat;
 import java.util.*;
-import combate.Combate;
+import combate.*;
 import personajes.*;
 
 /**
@@ -15,23 +16,28 @@ public class Principal {
 
 	private static Scanner sc = new Scanner(System.in);
 	private static ArrayList<Object> clases = new ArrayList<Object>();
+	private static boolean huir = true;
 
 	public static void main(String[] args) {
 
 		Enemigo enemigo = null;
+		int contador = 1;
 
 		elegirClase();
 		System.out.println("Esta es la clase que has elegido:\n\t" + clases.get(0).toString());
 
 		enemigo = generarEnemigo();
-		System.out.println("Enemigo:\n\t" + enemigo.toString());
-		System.out.println();
+		System.out.println("Estadísticas del enemigo:\n\t" + enemigo.toString());
 
-		System.out.println("Se va a comenzar el combate: ");
-		menuCombate(enemigo);
-
-		System.out.println("\n\t" + clases.get(0).toString());
-		System.out.println("\n\t" + enemigo.toString());
+		do {
+			System.out.println();
+			System.out.println("-----SE VA A COMENZAR EL COMBATE NÚMERO " + contador + "-----");
+			menuCombate(enemigo);
+			contador++;
+			subirNivel(contador, ((Base) clases.get(0)));
+			enemigo = generarEnemigo();
+			subirNivel(contador, enemigo);
+		} while (huir);
 		sc.close();
 	} // Del main
 
@@ -51,7 +57,7 @@ public class Principal {
 	 */
 	private static Enemigo generarEnemigo() {
 		Enemigo e = new Enemigo();
-		e.generarEstadísticas();
+		e.generarEstadisticas();
 		return e;
 	} // Del generarEnemigo
 
@@ -62,32 +68,51 @@ public class Principal {
 	private static void elegirClase() {
 		int opcion;
 		System.out.println("¿Qué personaje quieres elegir?");
-		System.out.println("\t1. Guerrero\n\t2. Mago\n\t3. Tanque");
+		System.out.println("\t1. Guerrero\n\t2. Mago\n\t3. Tanque\n\t4. Aleatorio");
 		do {
 			comprobarEntero();
 			opcion = sc.nextInt();
 			switch (opcion) {
 			case 1:
-				Guerrero c = new Guerrero();
-				c.generarEstadísticas();
-				clases.add(c);
+				Guerrero g = new Guerrero();
+				g.generarEstadisticas();
+				clases.add(g);
 				break;
 			case 2:
 				Mago m = new Mago();
-				m.generarEstadísticas();
+				m.generarEstadisticas();
 				clases.add(m);
 				break;
 			case 3:
 				Tanque t = new Tanque();
-				t.generarEstadísticas();
+				t.generarEstadisticas();
 				clases.add(t);
+				break;
+			case 4:
+				int min = 0, max = 2, aux;
+				aux = (int) (min + (Math.random() * (max - min + 1)));
+				if (aux == 0) {
+					Guerrero gAux = new Guerrero();
+					gAux.generarEstadisticas();
+					clases.add(gAux);
+				} // Del if
+				else if (aux == 1) {
+					Mago mAux = new Mago();
+					mAux.generarEstadisticas();
+					clases.add(mAux);
+				} // Del else-if
+				else {
+					Tanque tAux = new Tanque();
+					tAux.generarEstadisticas();
+					clases.add(tAux);
+				} // Del else
 				break;
 			default:
 				System.out.println("Error, elija una opcion correcta.");
-				System.out.println("\t1. Guerrero\n\t2. Mago\n\t3. Tanque");
+				System.out.println("\t1. Guerrero\n\t2. Mago\n\t3. Tanque\n\t4. Aleatorio");
 				break;
 			} // Del switch
-		} while (opcion != 1 && opcion != 2 && opcion != 3); // Del do-while
+		} while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4); // Del do-while
 	} // Del elegirClase
 
 	/**
@@ -120,13 +145,14 @@ public class Principal {
 				break;
 			case 3:
 				System.out.println("Ha decidido huir.");
+				huir = false;
 				break;
 			default:
 				System.out.println("ERROR");
 				mostrarRepeticion();
 				System.out.println();
 			} // Del switch
-		} while (enemigo.getVida() > 0 && opcion != 3 && ((Base) clases.get(0)).getVida() > 0);
+		} while (enemigo.getVida() > 0 && opcion != 3 && ((Base) clases.get(0)).getVida() > 0 && huir);
 	} // Del menuCombate
 
 	/**
@@ -141,35 +167,43 @@ public class Principal {
 			System.out.println("Somos más rápidos.");
 			System.out.println("Turno aliado");
 			combate.calcularDanioFisico(clases.get(0), enemigo);
-			System.out.println("Vida restante del enemigo: " + enemigo.getVida() + "\n");
+			System.out.println("Vida restante del enemigo: " + mostrarDosDecimales(enemigo.getVida()) + "\n");
 			if (enemigo.getVida() > 0) {
 				System.out.println("Turno enemigo");
-				combate.calcularDanioFisico(enemigo, clases.get(0));
-				System.out.println("Vida restante del personaje: " + ((Base) clases.get(0)).getVida() + "\n");
+				calcularTipoDanioEnemigo(enemigo, combate);
+				System.out.println(
+						"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
 				if (((Base) clases.get(0)).getVida() <= 0) {
 					System.out.println("Has perdido.");
 					System.exit(0);
 				} // Del if
 				mostrarRepeticion();
 			} // Del if
-			else
+			else {
 				System.out.println("El enemigo ha muerto, enhorabuena.");
+				clases.add(enemigo);
+			} // Del else
 		} // Del if
 		else {
 			System.out.println("Somos mas lentos.");
 			System.out.println("Turno enemigo");
-			combate.calcularDanioFisico(enemigo, clases.get(0));
-			System.out.println("Vida restante del personaje: " + ((Base) clases.get(0)).getVida() + "\n");
+			calcularTipoDanioEnemigo(enemigo, combate);
+			System.out.println(
+					"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
 			if (((Base) clases.get(0)).getVida() > 0) {
 				System.out.println("Turno aliado");
 				combate.calcularDanioFisico(clases.get(0), enemigo);
-				System.out.println("Vida restante del enemigo: " + enemigo.getVida() + "\n");
-				if (enemigo.getVida() <= 0)
+				System.out.println("Vida restante del enemigo: " + mostrarDosDecimales(enemigo.getVida()) + "\n");
+				if (enemigo.getVida() <= 0) {
 					System.out.println("El enemigo ha muerto, enhorabuena.");
+					clases.add(enemigo);
+				} // Del if
 				mostrarRepeticion();
 			} // Del if
-			else
+			else {
 				System.out.println("Has perdido.");
+				System.exit(0);
+			} // Del else
 		} // Del else
 	} // Del combateFisico
 
@@ -185,35 +219,91 @@ public class Principal {
 			System.out.println("Somos más rápidos.");
 			System.out.println("Turno aliado");
 			combate.calcularDanioMagico(clases.get(0), enemigo);
-			System.out.println("Vida restante del enemigo: " + enemigo.getVida() + "\n");
+			System.out.println("Vida restante del enemigo: " + mostrarDosDecimales(enemigo.getVida()) + "\n");
 			if (enemigo.getVida() > 0) {
 				System.out.println("Turno enemigo");
-				combate.calcularDanioMagico(enemigo, clases.get(0));
-				System.out.println("Vida restante del personaje: " + ((Base) clases.get(0)).getVida() + "\n");
+				calcularTipoDanioEnemigo(enemigo, combate);
+				System.out.println(
+						"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
 				if (((Base) clases.get(0)).getVida() <= 0) {
 					System.out.println("Has perdido.");
 					System.exit(0);
 				} // Del if
 				mostrarRepeticion();
 			} // Del if
-			else
+			else {
 				System.out.println("El enemigo ha muerto, enhorabuena.");
+				clases.add(enemigo);
+			} // Del else
 		} // Del if
 		else {
 			System.out.println("Somos mas lentos.");
 			System.out.println("Turno enemigo");
-			combate.calcularDanioMagico(enemigo, clases.get(0));
-			System.out.println("Vida restante del personaje: " + ((Base) clases.get(0)).getVida() + "\n");
+			calcularTipoDanioEnemigo(enemigo, combate);
+			System.out.println(
+					"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
 			if (((Base) clases.get(0)).getVida() > 0) {
 				System.out.println("Turno aliado");
 				combate.calcularDanioMagico(clases.get(0), enemigo);
-				System.out.println("Vida restante del enemigo: " + enemigo.getVida() + "\n");
-				if (enemigo.getVida() <= 0)
+				System.out.println("Vida restante del enemigo: " + mostrarDosDecimales(enemigo.getVida()) + "\n");
+				if (enemigo.getVida() <= 0) {
 					System.out.println("El enemigo ha muerto, enhorabuena.");
+					clases.add(enemigo);
+				} // Del if
 				mostrarRepeticion();
 			} // Del if
-			else
+			else {
 				System.out.println("Has perdido.");
+				System.exit(0);
+			} // Del else
 		} // Del else
 	} // Del combateMagico
+
+	/**
+	 * Método por el cual el enemigo siempre atacará con el tipo de daño mas eficaz.
+	 * 
+	 * @param combate objeto que importas para poder utilizar los métodos de la
+	 *                clase combate.
+	 * @param enemigo enemigo con el que se calcula el daño.
+	 */
+	private static void calcularTipoDanioEnemigo(Enemigo enemigo, Combate combate) {
+		if (enemigo.getAtaque() > enemigo.getMagia())
+			combate.calcularDanioFisico(enemigo, clases.get(0));
+		else
+			combate.calcularDanioMagico(enemigo, clases.get(0));
+	} // Del calcularTipoDanioEnemigo
+
+	/**
+	 * Método al cual le pasas por argumento un dato en double y te devuelve un
+	 * String del mismo sólo con dos decimales.
+	 * 
+	 * @param dato dato que le mandas para darle formato.
+	 * @return formato - String con el dato truncado.
+	 */
+	private static String mostrarDosDecimales(double dato) {
+		DecimalFormat df = new DecimalFormat("##.##");
+		String formato = df.format(dato);
+		return formato;
+	} // Del mostrarDosDecimales
+
+	private static void subirNivel(int nivel, Object aux) {
+		if (aux instanceof Guerrero) {
+			((Guerrero) aux).resetearEstadisticas();
+			((Guerrero) aux).generarEstadisticas();
+			((Guerrero) aux).aumentarEstadisticas(nivel);
+		} // Del if
+		else if (aux instanceof Mago) {
+			((Mago) aux).resetearEstadisticas();
+			((Mago) aux).generarEstadisticas();
+			((Mago) aux).aumentarEstadisticas(nivel);
+		} // Del else-if
+		else if (aux instanceof Tanque) {
+			((Tanque) aux).resetearEstadisticas();
+			((Tanque) aux).generarEstadisticas();
+			((Tanque) aux).aumentarEstadisticas(nivel);
+		} // Del else-if
+		else {
+			((Enemigo) aux).aumentarEstadisticas(nivel);
+		} // Del else
+	} // Del subirNivel
 } // Del class

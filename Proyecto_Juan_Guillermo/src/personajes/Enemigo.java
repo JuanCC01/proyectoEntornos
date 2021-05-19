@@ -119,14 +119,14 @@ public class Enemigo extends Base {
 	/**
 	 * Método que llama al resto de métodos para modificar todas las estadísticas.
 	 */
-	public void generarEstadísticas() {
+	public void generarEstadisticas() {
 		modificarMp();
 		modificarDefensa();
 		modificarVida();
 		modificarAtaque();
 		modificarVelocidad();
 		modificarMagia();
-	} // Del generarEstadísticas
+	} // Del generarEstadisticas
 
 	@Override
 	public String toString() {

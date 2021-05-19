@@ -53,7 +53,7 @@ public class Guerrero extends Base {
 	 * @return ataque - ataque modificado.
 	 */
 	public double modificarAtaque() {
-		return ataque = getAtaque() * 1.5;
+		return ataque = getAtaque() * 1.35;
 	} // Del modificarAtaque
 
 	/**
@@ -62,7 +62,7 @@ public class Guerrero extends Base {
 	 * @return vida - vida modificada.
 	 */
 	public double modificarVida() {
-		return vida = getVida() * 1.25;
+		return vida = getVida() * 1.15;
 	} // Del modificarVida
 
 	/**
@@ -71,18 +71,18 @@ public class Guerrero extends Base {
 	 * @return magia - magia modificada.
 	 */
 	public double modificarMagia() {
-		return magia = getMagia() * 0.5;
+		return magia = getMagia() * 0.75;
 	} // Del modificarMagia
 
 	/**
 	 * Método que llama al resto de métodos para modificar todas las estadísticas.
 	 */
-	public void generarEstadísticas() {
+	public void generarEstadisticas() {
 		modificarMp();
 		modificarVida();
 		modificarAtaque();
 		modificarMagia();
-	} // Del generarEstadísticas
+	} // Del generarEstadisticas
 
 	@Override
 	public String toString() {
