@@ -5,7 +5,7 @@ public class Base {
 	protected double vida, mp, ataque, defensa, magia, velocidad;
 
 	public Base() {
-		vida = 100.0;
+		vida = 25.0;
 		mp = 25.0;
 		ataque = 10;
 		defensa = 10;

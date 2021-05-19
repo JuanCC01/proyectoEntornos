@@ -22,11 +22,11 @@ public class Tanque extends Base {
 	}
 
 	public double setAtaque() {
-		return ataque = getAtaque() * 1.5;
+		return ataque = getAtaque() * 1.25;
 	}
 
 	public double setVida() {
-		return vida = getVida() * 1.75;
+		return vida = getVida() * 1.5;
 	}
 
 	public double setDefensa() {

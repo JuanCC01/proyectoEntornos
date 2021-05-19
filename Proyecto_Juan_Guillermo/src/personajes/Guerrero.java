@@ -22,15 +22,11 @@ public class Guerrero extends Base {
 	}
 
 	public double setAtaque() {
-		return ataque = getAtaque() * 1.75;
+		return ataque = getAtaque() * 1.5;
 	}
 
 	public double setVida() {
-		return vida = getVida() * 1.5;
-	}
-
-	public double setDefensa() {
-		return defensa = getDefensa() * 1.25;
+		return vida = getVida() * 1.25;
 	}
 
 	public double setMagia() {
@@ -43,7 +39,6 @@ public class Guerrero extends Base {
 
 	public void setEstadisticas() {
 		setMp();
-		setDefensa();
 		setVida();
 		setAtaque();
 		setMagia();

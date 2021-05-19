@@ -4,35 +4,25 @@ import personajes.*;
 
 public class Combate {
 
-	public boolean comprobarVelocidad(Object o1, Object o2) {
+	public boolean comprobarVelocidad(Object aliado, Object enemigo) {
 		boolean vasPrimero = false;
-		if (((Base) o1).getVelocidad() >= ((Base) o1).getVelocidad()) {
+		if (((Base) aliado).getVelocidad() >= ((Base) enemigo).getVelocidad()) {
 			vasPrimero = true;
 		} // Del if
 		return vasPrimero;
 	} // Del comprobarVelocidad
 
-	public void calcularDanio(Object atacante, Object defensor) {
+	public void calcularDanioFisico(Object atacante, Object defensor) {
 		double vidaRestante = 0;
-		if (atacante instanceof Mago) {
-			vidaRestante = ((Enemigo) defensor).getVida()
-					- (((Mago) atacante).getMagia() - ((Enemigo) defensor).getDefensa());
-			((Enemigo) defensor).setVida(vidaRestante);
-		} // Del if
-		else if (atacante instanceof Guerrero) {
-			vidaRestante = ((Enemigo) defensor).getVida()
-					- (((Guerrero) atacante).getAtaque() - ((Enemigo) defensor).getDefensa());
-			((Enemigo) defensor).setVida(vidaRestante);
-		} // Del else-if
-		else if (atacante instanceof Tanque) {
-			vidaRestante = ((Enemigo) defensor).getVida()
-					- (((Tanque) atacante).getAtaque() - ((Enemigo) defensor).getDefensa());
-			((Enemigo) defensor).setVida(vidaRestante);
-		} // Del else-if
-		else {
-			vidaRestante = ((Base) defensor).getVida()
-					- (((Enemigo) atacante).getAtaque() - ((Base) defensor).getDefensa());
-			((Base) defensor).setVida(vidaRestante);
-		} // Del else
-	} // Del calcularDanio
+		vidaRestante = ((Base) defensor).getVida()
+				- ((2 * ((Base) atacante).getAtaque()) - ((Base) defensor).getDefensa());
+		((Base) defensor).setVida(vidaRestante);
+	} // Del calcularDanioFisico
+
+	public void calcularDanioMagico(Object atacante, Object defensor) {
+		double vidaRestante = 0;
+		vidaRestante = ((Base) defensor).getVida()
+				- ((2 * ((Base) atacante).getMagia()) - ((Base) defensor).getDefensa());
+		((Base) defensor).setVida(vidaRestante);
+	} // Del calcularDanioMagico
 } // Del class
