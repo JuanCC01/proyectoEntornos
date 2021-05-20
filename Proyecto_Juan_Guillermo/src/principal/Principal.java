@@ -377,7 +377,7 @@ public class Principal {
 			System.out.println("Se va a proceder a leer el archivo");
 			io.leer();
 		} // Del if
-		System.out.println("Fin del programa.");
+		System.out.println("Fin del Juego.");
 		sc.close();
 	} // Del exportarDatos
 
