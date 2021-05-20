@@ -23,24 +23,34 @@ public class Principal {
 	private static EntradaSalida io = new EntradaSalida();
 
 	public static void main(String[] args) {
-
+		System.out.println("::::::::::: :::::::::: :::    ::: ::::::::::: :::::::::  :::::::::   ::::::::  \r\n"
+				+ "    :+:     :+:        :+:    :+:     :+:     :+:    :+: :+:    :+: :+:    :+: \r\n"
+				+ "    +:+     +:+         +:+  +:+      +:+     +:+    +:+ +:+    +:+ +:+        \r\n"
+				+ "    +#+     +#++:++#     +#++:+       +#+     +#++:++#:  +#++:++#+  :#:        \r\n"
+				+ "    +#+     +#+         +#+  +#+      +#+     +#+    +#+ +#+        +#+   +#+# \r\n"
+				+ "    #+#     #+#        #+#    #+#     #+#     #+#    #+# #+#        #+#    #+# \r\n"
+				+ "    ###     ########## ###    ###     ###     ###    ### ###         ########  \r\n" + "\r\n" + "");
 		Enemigo enemigo = null;
 
 		elegirClase();
 		System.out.println("Esta es la clase que has elegido:\n\t" + clases.get(0).toString());
 
 		enemigo = generarEnemigo();
-		System.out.println("Estadísticas del enemigo:\n\t" + enemigo.toString());
 
 		do {
 			System.out.println();
-			System.out.println("-----SE VA A COMENZAR EL COMBATE NÚMERO " + contador + "-----");
+			System.out.println("-----SE VA A COMENZAR EL COMBATE NÚMERO " + contador + "-----\n");
+			System.out.println("Estadísticas del enemigo:\n\t" + enemigo.toString() + "\n");
 			menuCombate(enemigo);
-			contador++;
-			subirNivel(contador, ((Base) clases.get(0)));
-			enemigo = generarEnemigo();
-			subirNivel(contador, enemigo);
-		} while (huir);
+			if (huir) {
+				contador++;
+				subirNivel(contador, ((Base) clases.get(0)));
+				System.out.println("¡Has subido al nivel! " + contador);
+				System.out.println(clases.get(0).toString() + "\n");
+				enemigo = generarEnemigo();
+				subirNivel(contador, enemigo);
+			} // Del if
+		} while (huir); // Del do-while
 		if (!huir) {
 			exportarDatos();
 		} // Del if
@@ -76,7 +86,8 @@ public class Principal {
 	private static void elegirClase() {
 		int opcion;
 		System.out.println("¿Qué personaje quieres elegir?");
-		System.out.println("\t1. Guerrero\n\t2. Mago\n\t3. Tanque\n\t4. Aleatorio");
+		System.out
+				.println("\t1. Guerrero\t|\t2. Mago\n\t-------------\t|\t-------------\n\t3. Tanque\t|\t4. Aleatorio");
 		do {
 			comprobarEntero();
 			opcion = sc.nextInt();
@@ -85,16 +96,19 @@ public class Principal {
 				Guerrero g = new Guerrero();
 				g.generarEstadisticas();
 				clases.add(g);
+				imprimirAsci(clases.get(0));
 				break;
 			case 2:
 				Mago m = new Mago();
 				m.generarEstadisticas();
 				clases.add(m);
+				imprimirAsci(clases.get(0));
 				break;
 			case 3:
 				Tanque t = new Tanque();
 				t.generarEstadisticas();
 				clases.add(t);
+				imprimirAsci(clases.get(0));
 				break;
 			case 4:
 				int min = 0, max = 2, aux;
@@ -103,16 +117,19 @@ public class Principal {
 					Guerrero gAux = new Guerrero();
 					gAux.generarEstadisticas();
 					clases.add(gAux);
+					imprimirAsci(clases.get(0));
 				} // Del if
 				else if (aux == 1) {
 					Mago mAux = new Mago();
 					mAux.generarEstadisticas();
 					clases.add(mAux);
+					imprimirAsci(clases.get(0));
 				} // Del else-if
 				else {
 					Tanque tAux = new Tanque();
 					tAux.generarEstadisticas();
 					clases.add(tAux);
+					imprimirAsci(clases.get(0));
 				} // Del else
 				break;
 			default:
@@ -339,7 +356,7 @@ public class Principal {
 		System.out.println("Escriba su nombre: ");
 		nombre = sc.next();
 		System.out.println();
-		return datosJugador = "Jugador: " + nombre + "\tNúmero de rondas: " + (contador - 1) + "\n\tPersonaje: "
+		return datosJugador = "Jugador: " + nombre + "\tNúmero de rondas: " + (contador) + "\n\tPersonaje: "
 				+ clases.get(0).toString() + "\n";
 	} // Del pedirDatos
 
@@ -361,4 +378,39 @@ public class Principal {
 		System.out.println("Fin del programa.");
 		sc.close();
 	} // Del exportarDatos
+
+	private static void imprimirAsci(Object aux) {
+		if (aux instanceof Guerrero) {
+			System.out.println("Has elegido Guerrero");
+			System.out.println("    _,.\r\n" + "    ,` -.)\r\n" + "   ( _/-\\\\-._\r\n"
+					+ "  /,|`--._,-^|            ,\r\n" + "  \\_| |`-._/||          ,'|\r\n"
+					+ "    |  `-, / |         /  /\r\n" + "    |     || |        /  /\r\n"
+					+ "     `r-._||/   __   /  /\r\n" + " __,-<_     )`-/  `./  /\r\n" + "'  \\   `---'   \\   /  /\r\n"
+					+ "    |           |./  /\r\n" + "    /           //  /\r\n" + "\\_/' \\         |/  /\r\n"
+					+ " |    |   _,^-'/  /\r\n" + " |    , ``  (\\/  /_\r\n" + "  \\,.->._    \\X-=/^\r\n"
+					+ "  (  /   `-._//^`\r\n" + "   `Y-.____(__}\r\n" + "    |     {__)\r\n" + "          ()");
+		} // Del if
+		else if (aux instanceof Mago) {
+			System.out.println("Has elegido Mago");
+			System.out.println("              _,-'|\r\n" + "           ,-'._  |\r\n" + " .||,      |####\\ |\r\n"
+					+ "\\.`',/     \\####| |\r\n" + "= ,. =      |###| |\r\n" + "/ || \\    ,-'\\#/,'`.\r\n"
+					+ "  ||     ,'   `,,. `.\r\n" + "  ,|____,' , ,;' \\| |\r\n" + " (3|\\    _/|/'   _| |\r\n"
+					+ "  ||/,-''  | >-'' _,\\\\\r\n" + "  ||'      ==\\ ,-'  ,'\r\n" + "  ||       |  V \\ ,|\r\n"
+					+ "  ||       |    |` |\r\n" + "  ||       |    |   \\\r\n" + "  ||       |    \\    \\\r\n"
+					+ "  ||       |     |    \\\r\n" + "  ||       |      \\_,-'\r\n" + "  ||       |___,,--\")_\\\r\n"
+					+ "  ||         |_|   ccc/\r\n" + "  ||        ccc/\r\n" + "  ||             ");
+		} // Del else-if
+		else {
+			System.out.println("Has elegido Tanque");
+			System.out.println("  ,   A           {}\r\n" + " / \\, | ,        .--.\r\n" + "|    =|= >      /.--.\\\r\n"
+					+ " \\ /` | `       |====|\r\n" + "  `   |         |`::`|\r\n"
+					+ "      |     .-;`\\..../`;_.-^-._\r\n" + "     /\\\\/  /  |...::..|`   :   `|\r\n"
+					+ "     |:'\\ |   /'''::''|   .:.   |\r\n" + "      \\ /\\;-,/\\   ::  |..:::::..|\r\n"
+					+ "      |\\ <` >  >._::_.| ':::::' |\r\n" + "      | `\"\"`  /   ^^  |   ':'   |\r\n"
+					+ "      |       |       \\    :    /\r\n" + "      |       |        \\   :   /\r\n"
+					+ "      |       |___/\\___|`-.:.-`\r\n" + "      |        \\_ || _/    `\r\n"
+					+ "      |        <_ >< _>\r\n" + "      |        |  ||  |\r\n" + "      |        |  ||  |\r\n"
+					+ "      |       _\\.:||:./_\r\n" + "      |      /____/\\____\\");
+		} // Del else
+	} // Del imprimirAsci
 } // Del class

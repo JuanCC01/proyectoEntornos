@@ -106,7 +106,10 @@ public class Tanque extends Base {
 
 	@Override
 	public String toString() {
-		return "Tanque [clase=" + clase + ", vida=" + vida + ", mp=" + mp + ", ataque=" + ataque + ", defensa="
-				+ defensa + ", magia=" + magia + ", velocidad=" + velocidad + "]";
+		return "Tanque [clase=" + clase + ", vida=" + ((double) Math.round(vida * 100d) / 100d) + ", mp="
+				+ ((double) Math.round(mp * 100d) / 100d) + ", ataque=" + ((double) Math.round(ataque * 100d) / 100d)
+				+ ", defensa=" + ((double) Math.round(defensa * 100d) / 100d) + ", magia="
+				+ ((double) Math.round(magia * 100d) / 100d) + ", velocidad="
+				+ ((double) Math.round(velocidad * 100d) / 100d) + "]";
 	} // Del toString
 } // Del class
