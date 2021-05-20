@@ -1,2 +1,2 @@
-Jugador: Guillermo	Número de rondas: 1
-	Personaje: Mago [clase=Mago, vida=50.0, mp=57.49999999999999, ataque=15.0, defensa=15.0, magia=27.0, velocidad=3.3000000000000003]
+Jugador: Guillermo	Número de rondas: 2
+	Personaje: Mago [clase=Mago, vida=-18.21, mp=57.5, ataque=15.0, defensa=15.0, magia=27.0, velocidad=3.3]

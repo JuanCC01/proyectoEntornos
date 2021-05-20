@@ -381,6 +381,9 @@ public class Principal {
 		sc.close();
 	} // Del exportarDatos
 
+	/**
+	 * Método que imprime un dibujo en ASCII de cada clase.
+	 * */
 	private static void imprimirAsci(Object aux) {
 		if (aux instanceof Guerrero) {
 			System.out.println("Has elegido Guerrero");
