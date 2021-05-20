@@ -383,6 +383,8 @@ public class Principal {
 
 	/**
 	 * Método que imprime un dibujo en ASCII de cada clase.
+	 * 
+	 * @param aux Objeto de tipo Base para saber que dibujo realizar.
 	 * */
 	private static void imprimirAsci(Object aux) {
 		if (aux instanceof Guerrero) {
