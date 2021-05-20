@@ -41,7 +41,7 @@ public class Principal {
 
 		do {
 			System.out.println();
-			System.out.println("-----SE VA A COMENZAR EL COMBATE NÚMERO " + contador + "-----\n");
+			System.out.println("-----VA A COMENZAR EL COMBATE NÚMERO " + contador + "-----\n");
 			System.out.println("Estadísticas del enemigo:\n\t" + enemigo.toString() + "\n");
 			menuCombate(enemigo);
 			if (huir) {

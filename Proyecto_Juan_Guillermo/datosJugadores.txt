@@ -18,3 +18,7 @@ Jugador: aaaa	Número de rondas: 6
 	Personaje: Mago [clase=Mago, vida=-35.78, mp=172.5, ataque=45.0, defensa=45.0, magia=81.0, velocidad=3.3]
 Jugador: Guillermo	Número de rondas: 1
 	Personaje: Guerrero [clase=Guerrero, vida=28.75, mp=18.75, ataque=13.5, defensa=10.0, magia=7.5, velocidad=3.0]
+Jugador: Juan	Número de rondas: 1
+	Personaje: Tanque [clase=Tanque, vida=-2.79, mp=12.5, ataque=11.5, defensa=12.5, magia=5.0, velocidad=2.55]
+Jugador: Juan	Número de rondas: 37
+	Personaje: Guerrero [clase=Guerrero, vida=1063.75, mp=693.75, ataque=499.5, defensa=370.0, magia=277.5, velocidad=3.0]
