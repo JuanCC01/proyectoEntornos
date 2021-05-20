@@ -23,6 +23,9 @@ public class Principal {
 	private static EntradaSalida io = new EntradaSalida();
 
 	public static void main(String[] args) {
+
+		Enemigo enemigo = null;
+
 		System.out.println("::::::::::: :::::::::: :::    ::: ::::::::::: :::::::::  :::::::::   ::::::::  \r\n"
 				+ "    :+:     :+:        :+:    :+:     :+:     :+:    :+: :+:    :+: :+:    :+: \r\n"
 				+ "    +:+     +:+         +:+  +:+      +:+     +:+    +:+ +:+    +:+ +:+        \r\n"
@@ -30,7 +33,6 @@ public class Principal {
 				+ "    +#+     +#+         +#+  +#+      +#+     +#+    +#+ +#+        +#+   +#+# \r\n"
 				+ "    #+#     #+#        #+#    #+#     #+#     #+#    #+# #+#        #+#    #+# \r\n"
 				+ "    ###     ########## ###    ###     ###     ###    ### ###         ########  \r\n" + "\r\n" + "");
-		Enemigo enemigo = null;
 
 		elegirClase();
 		System.out.println("Esta es la clase que has elegido:\n\t" + clases.get(0).toString());
