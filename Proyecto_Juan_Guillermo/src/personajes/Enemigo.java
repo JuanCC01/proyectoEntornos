@@ -17,8 +17,8 @@ public class Enemigo extends Base {
 	 */
 	public Enemigo() {
 		super();
-		String lNombres[]= {"Mago oscuro","Elfo","Dragon","Orco","Arquero oscuro"};
-		int n = (int)(Math.random()*((lNombres.length-1)+1));
+		String lNombres[] = { "Mago oscuro", "Elfo", "Dragon", "Orco", "Arquero oscuro" };
+		int n = (int) (Math.random() * ((lNombres.length - 1) + 1));
 		nombre = lNombres[n];
 	} // Del constructor
 

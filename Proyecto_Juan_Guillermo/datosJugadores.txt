@@ -6,3 +6,15 @@ Jugador: 1	Número de rondas: 2
 	Personaje: Guerrero [clase=Guerrero, vida=-2.12, mp=37.5, ataque=27.0, defensa=20.0, magia=15.0, velocidad=3.0]
 Jugador: a	Número de rondas: 3
 	Personaje: Tanque [clase=Tanque, vida=-14.48, mp=37.5, ataque=34.5, defensa=37.5, magia=15.0, velocidad=2.55]
+Jugador: Guillermo	Número de rondas: 2
+	Personaje: Mago [clase=Mago, vida=50.0, mp=57.5, ataque=15.0, defensa=15.0, magia=27.0, velocidad=3.3]
+Jugador: aaa	Número de rondas: 1
+	Personaje: Guerrero [clase=Guerrero, vida=28.75, mp=18.75, ataque=13.5, defensa=10.0, magia=7.5, velocidad=3.0]
+Jugador: aaa	Número de rondas: 1
+	Personaje: Mago [clase=Mago, vida=25.0, mp=28.75, ataque=7.5, defensa=7.5, magia=13.5, velocidad=3.3]
+Jugador: aaaa	Número de rondas: 1
+	Personaje: Guerrero [clase=Guerrero, vida=-5.03, mp=18.75, ataque=13.5, defensa=10.0, magia=7.5, velocidad=3.0]
+Jugador: aaaa	Número de rondas: 6
+	Personaje: Mago [clase=Mago, vida=-35.78, mp=172.5, ataque=45.0, defensa=45.0, magia=81.0, velocidad=3.3]
+Jugador: Guillermo	Número de rondas: 1
+	Personaje: Guerrero [clase=Guerrero, vida=28.75, mp=18.75, ataque=13.5, defensa=10.0, magia=7.5, velocidad=3.0]

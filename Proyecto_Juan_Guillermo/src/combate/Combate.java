@@ -37,10 +37,22 @@ public class Combate {
 	public void calcularDanioFisico(Object atacante, Object defensor) {
 		double vidaRestante = 0;
 		double vidaActual = ((Base) defensor).getVida();
-		vidaRestante = ((Base) defensor).getVida()
-				- ((2 * ((Base) atacante).getAtaque()) - ((Base) defensor).getDefensa());
-		if (vidaRestante > vidaActual)
+		if (evadir()) {
+			System.out.println("¡El ataque ha fallado!");
 			vidaRestante = vidaActual;
+		} // Del if
+		else {
+			if (golpeCritico()) {
+				System.out.println("¡Golpe crítico!");
+				vidaRestante = ((Base) defensor).getVida()
+						- ((1.5 * 2 * ((Base) atacante).getAtaque()) - ((Base) defensor).getDefensa());
+			} // Del if
+			else
+				vidaRestante = ((Base) defensor).getVida()
+						- ((2 * ((Base) atacante).getAtaque()) - ((Base) defensor).getDefensa());
+			if (vidaRestante > vidaActual)
+				vidaRestante = vidaActual;
+		} // Del else
 		((Base) defensor).setVida(vidaRestante);
 	} // Del calcularDanioFisico
 
@@ -54,10 +66,81 @@ public class Combate {
 	public void calcularDanioMagico(Object atacante, Object defensor) {
 		double vidaRestante = 0;
 		double vidaActual = ((Base) defensor).getVida();
-		vidaRestante = ((Base) defensor).getVida()
-				- ((2 * ((Base) atacante).getMagia()) - ((Base) defensor).getDefensa());
-		if (vidaRestante > vidaActual)
+		if (evadir()) {
+			System.out.println("¡El ataque ha fallado!");
 			vidaRestante = vidaActual;
+		} // Del if
+		else {
+			if (golpeCritico()) {
+				System.out.println("¡Golpe crítico!");
+				vidaRestante = ((Base) defensor).getVida()
+						- ((1.5 * 2 * ((Base) atacante).getMagia()) - ((Base) defensor).getDefensa());
+			} // Del if
+			else
+				vidaRestante = ((Base) defensor).getVida()
+						- ((2 * ((Base) atacante).getMagia()) - ((Base) defensor).getDefensa());
+			if (vidaRestante > vidaActual)
+				vidaRestante = vidaActual;
+		} // Del else
 		((Base) defensor).setVida(vidaRestante);
 	} // Del calcularDanioMagico
+
+	/**
+	 * Método que te permite defenderte por lo que recibes solamente un 50% del daño
+	 * del ataque.
+	 * 
+	 * @param atacante Personaje que ataca.
+	 * @param defensor Personaje que defiende.
+	 */
+	public void defender(Enemigo atacante, Object defensor) {
+		double vidaRestante = 0;
+		double vidaActual = ((Base) defensor).getVida();
+		if (evadir()) {
+			System.out.println("¡El ataque ha fallado!");
+			vidaRestante = vidaActual;
+		} // Del if
+		else {
+			if (atacante.getAtaque() > atacante.getMagia()) {
+				vidaRestante = ((Base) defensor).getVida()
+						- (((2 * ((Base) atacante).getAtaque()) - ((Base) defensor).getDefensa()) / 2);
+			} // Del if
+			else {
+				vidaRestante = ((Base) defensor).getVida()
+						- (((2 * ((Base) atacante).getMagia()) - ((Base) defensor).getDefensa()) / 2);
+			} // Del else
+			if (vidaRestante > vidaActual)
+				vidaRestante = vidaActual;
+		} // Del else
+		((Base) defensor).setVida(vidaRestante);
+	} // Del defender
+
+	/**
+	 * Método que calcula si un golpe es o no crítico.
+	 * 
+	 * @return esCritico - boolean que devuelve true si es crítico o false en caso
+	 *         contrario.
+	 */
+	private boolean golpeCritico() {
+		boolean esCritico = false;
+		double min = 0, max = 100, aux;
+		aux = min + (Math.random() * (max - min));
+		if (aux > 0 && aux < 6.25)
+			esCritico = true;
+		return esCritico;
+	} // Del golpeCritico
+
+	/**
+	 * Método que calcula si el ataque acierta.
+	 * 
+	 * @return evitado - boolean que devuelve true si es lo evita o false en caso
+	 *         contrario.
+	 */
+	private boolean evadir() {
+		boolean evitado = false;
+		double min = 0, max = 100, aux;
+		aux = min + (Math.random() * (max - min));
+		if (aux > 0 && aux < 6.25)
+			evitado = true;
+		return evitado;
+	} // Del evadir;
 } // Del class

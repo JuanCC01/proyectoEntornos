@@ -47,7 +47,7 @@ public class Principal {
 			if (huir) {
 				contador++;
 				subirNivel(contador, ((Base) clases.get(0)));
-				System.out.println("¡Has subido al nivel! " + contador);
+				System.out.println("¡Has subido al nivel " + contador + "!");
 				System.out.println(clases.get(0).toString() + "\n");
 				enemigo = generarEnemigo();
 				subirNivel(contador, enemigo);
@@ -98,19 +98,19 @@ public class Principal {
 				Guerrero g = new Guerrero();
 				g.generarEstadisticas();
 				clases.add(g);
-				imprimirAsci(clases.get(0));
+				imprimirAscii(clases.get(0));
 				break;
 			case 2:
 				Mago m = new Mago();
 				m.generarEstadisticas();
 				clases.add(m);
-				imprimirAsci(clases.get(0));
+				imprimirAscii(clases.get(0));
 				break;
 			case 3:
 				Tanque t = new Tanque();
 				t.generarEstadisticas();
 				clases.add(t);
-				imprimirAsci(clases.get(0));
+				imprimirAscii(clases.get(0));
 				break;
 			case 4:
 				int min = 0, max = 2, aux;
@@ -119,24 +119,25 @@ public class Principal {
 					Guerrero gAux = new Guerrero();
 					gAux.generarEstadisticas();
 					clases.add(gAux);
-					imprimirAsci(clases.get(0));
+					imprimirAscii(clases.get(0));
 				} // Del if
 				else if (aux == 1) {
 					Mago mAux = new Mago();
 					mAux.generarEstadisticas();
 					clases.add(mAux);
-					imprimirAsci(clases.get(0));
+					imprimirAscii(clases.get(0));
 				} // Del else-if
 				else {
 					Tanque tAux = new Tanque();
 					tAux.generarEstadisticas();
 					clases.add(tAux);
-					imprimirAsci(clases.get(0));
+					imprimirAscii(clases.get(0));
 				} // Del else
 				break;
 			default:
 				System.out.println("Error, elija una opcion correcta.");
-				System.out.println("\t1. Guerrero\n\t2. Mago\n\t3. Tanque\n\t4. Aleatorio");
+				System.out.println(
+						"\t1. Guerrero\t|\t2. Mago\n\t-------------\t|\t-------------\n\t3. Tanque\t|\t4. Aleatorio");
 				break;
 			} // Del switch
 		} while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4); // Del do-while
@@ -148,7 +149,7 @@ public class Principal {
 	 */
 	private static void mostrarRepeticion() {
 		System.out.println("Elija que quiere hacer: ");
-		System.out.println("\t1. Ataque físico.\n\t2. Ataque mágico.\n\t3. Huir del combate.");
+		System.out.println("\t1. Ataque físico.\n\t2. Ataque mágico.\n\t3. Defender.\n\t4. Huir del combate.");
 	} // Del mostrarRepeticion
 
 	/**
@@ -173,6 +174,9 @@ public class Principal {
 				combateMagico(combate, enemigo);
 				break;
 			case 3:
+				defenderCombate(combate, enemigo);
+				break;
+			case 4:
 				System.out.println("Ha decidido huir.");
 				huir = false;
 				break;
@@ -181,7 +185,7 @@ public class Principal {
 				mostrarRepeticion();
 				System.out.println();
 			} // Del switch
-		} while (enemigo.getVida() > 0 && opcion != 3 && ((Base) clases.get(0)).getVida() > 0 && huir);
+		} while (enemigo.getVida() > 0 && opcion != 4 && ((Base) clases.get(0)).getVida() > 0 && huir);
 	} // Del menuCombate
 
 	/**
@@ -293,6 +297,27 @@ public class Principal {
 	} // Del combateMagico
 
 	/**
+	 * Método que desarrolla el combate si eliges "Defender".
+	 * 
+	 * @param combate objeto que importas para poder utilizar los métodos de la
+	 *                clase combate.
+	 * 
+	 * @param enemigo enemigo con el que vas a combatir.
+	 */
+	private static void defenderCombate(Combate combate, Enemigo enemigo) {
+		System.out.println("Vamos a defendernos.");
+		combate.defender(enemigo, clases.get(0));
+		System.out.println(
+				"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
+		if (((Base) clases.get(0)).getVida() <= 0) {
+			System.out.println("Has perdido.");
+			exportarDatos();
+			System.exit(0);
+		} // Del if
+		mostrarRepeticion();
+	} // Del defenderCombate
+
+	/**
 	 * Método por el cual el enemigo siempre atacará con el tipo de daño mas eficaz.
 	 * 
 	 * @param combate objeto que importas para poder utilizar los métodos de la
@@ -385,8 +410,8 @@ public class Principal {
 	 * Método que imprime un dibujo en ASCII de cada clase.
 	 * 
 	 * @param aux Objeto de tipo Base para saber que dibujo realizar.
-	 * */
-	private static void imprimirAsci(Object aux) {
+	 */
+	private static void imprimirAscii(Object aux) {
 		if (aux instanceof Guerrero) {
 			System.out.println("Has elegido Guerrero");
 			System.out.println("    _,.\r\n" + "    ,` -.)\r\n" + "   ( _/-\\\\-._\r\n"
@@ -419,5 +444,5 @@ public class Principal {
 					+ "      |        <_ >< _>\r\n" + "      |        |  ||  |\r\n" + "      |        |  ||  |\r\n"
 					+ "      |       _\\.:||:./_\r\n" + "      |      /____/\\____\\");
 		} // Del else
-	} // Del imprimirAsci
+	} // Del imprimirAscii
 } // Del class
