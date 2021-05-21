@@ -23,6 +23,11 @@ public class Principal {
 	private static int contador = 1;
 	private static EntradaSalida io = new EntradaSalida();
 
+	/**
+	 * Método principal.
+	 * 
+	 * @param args Argumentos que se le pueden pasar de manera previa al programa.
+	 */
 	public static void main(String[] args) {
 
 		Enemigo enemigo = null;
