@@ -19,6 +19,7 @@ public class Principal {
 	private static ArrayList<Object> clases = new ArrayList<Object>();
 	private static boolean huir = true;
 	private static String datosJugador;
+	private static double vidaMax, mpMax;
 	private static int contador = 1;
 	private static EntradaSalida io = new EntradaSalida();
 
@@ -41,6 +42,8 @@ public class Principal {
 
 		do {
 			System.out.println();
+			vidaMax = ((Base) clases.get(0)).getVida();
+			mpMax = ((Base) clases.get(0)).getMp();
 			System.out.println("-----VA A COMENZAR EL COMBATE NÚMERO " + contador + "-----\n");
 			System.out.println("Estadísticas del enemigo:\n\t" + enemigo.toString() + "\n");
 			menuCombate(enemigo);
@@ -149,7 +152,8 @@ public class Principal {
 	 */
 	private static void mostrarRepeticion() {
 		System.out.println("Elija que quiere hacer: ");
-		System.out.println("\t1. Ataque físico.\n\t2. Ataque mágico.\n\t3. Defender.\n\t4. Huir del combate.");
+		System.out.println(
+				"\t1. Ataque físico.\n\t2. Ataque mágico.\n\t3. Defender.\n\t4. Curar.\n\t5. Huir del combate.");
 	} // Del mostrarRepeticion
 
 	/**
@@ -177,6 +181,9 @@ public class Principal {
 				defenderCombate(combate, enemigo);
 				break;
 			case 4:
+				curarCombate(combate, enemigo);
+				break;
+			case 5:
 				System.out.println("Ha decidido huir.");
 				huir = false;
 				break;
@@ -185,7 +192,7 @@ public class Principal {
 				mostrarRepeticion();
 				System.out.println();
 			} // Del switch
-		} while (enemigo.getVida() > 0 && opcion != 4 && ((Base) clases.get(0)).getVida() > 0 && huir);
+		} while (enemigo.getVida() > 0 && opcion != 5 && ((Base) clases.get(0)).getVida() > 0 && huir);
 	} // Del menuCombate
 
 	/**
@@ -200,12 +207,11 @@ public class Principal {
 			System.out.println("Somos más rápidos.");
 			System.out.println("Turno aliado");
 			combate.calcularDanioFisico(clases.get(0), enemigo);
-			System.out.println("Vida restante del enemigo: " + mostrarDosDecimales(enemigo.getVida()) + "\n");
+			mostrarVidaMpEnemigo(enemigo);
 			if (enemigo.getVida() > 0) {
 				System.out.println("Turno enemigo");
 				calcularTipoDanioEnemigo(enemigo, combate);
-				System.out.println(
-						"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
+				mostrarVidaMpPersonaje();
 				if (((Base) clases.get(0)).getVida() <= 0) {
 					System.out.println("Has perdido.");
 					exportarDatos();
@@ -222,12 +228,11 @@ public class Principal {
 			System.out.println("Somos mas lentos.");
 			System.out.println("Turno enemigo");
 			calcularTipoDanioEnemigo(enemigo, combate);
-			System.out.println(
-					"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
+			mostrarVidaMpPersonaje();
 			if (((Base) clases.get(0)).getVida() > 0) {
 				System.out.println("Turno aliado");
 				combate.calcularDanioFisico(clases.get(0), enemigo);
-				System.out.println("Vida restante del enemigo: " + mostrarDosDecimales(enemigo.getVida()) + "\n");
+				mostrarVidaMpEnemigo(enemigo);
 				if (enemigo.getVida() <= 0) {
 					System.out.println("El enemigo ha muerto, enhorabuena.");
 					clases.add(enemigo);
@@ -254,12 +259,11 @@ public class Principal {
 			System.out.println("Somos más rápidos.");
 			System.out.println("Turno aliado");
 			combate.calcularDanioMagico(clases.get(0), enemigo);
-			System.out.println("Vida restante del enemigo: " + mostrarDosDecimales(enemigo.getVida()) + "\n");
+			mostrarVidaMpEnemigo(enemigo);
 			if (enemigo.getVida() > 0) {
 				System.out.println("Turno enemigo");
 				calcularTipoDanioEnemigo(enemigo, combate);
-				System.out.println(
-						"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
+				mostrarVidaMpPersonaje();
 				if (((Base) clases.get(0)).getVida() <= 0) {
 					System.out.println("Has perdido.");
 					exportarDatos();
@@ -276,12 +280,11 @@ public class Principal {
 			System.out.println("Somos mas lentos.");
 			System.out.println("Turno enemigo");
 			calcularTipoDanioEnemigo(enemigo, combate);
-			System.out.println(
-					"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
+			mostrarVidaMpPersonaje();
 			if (((Base) clases.get(0)).getVida() > 0) {
 				System.out.println("Turno aliado");
 				combate.calcularDanioMagico(clases.get(0), enemigo);
-				System.out.println("Vida restante del enemigo: " + mostrarDosDecimales(enemigo.getVida()) + "\n");
+				mostrarVidaMpEnemigo(enemigo);
 				if (enemigo.getVida() <= 0) {
 					System.out.println("El enemigo ha muerto, enhorabuena.");
 					clases.add(enemigo);
@@ -306,9 +309,8 @@ public class Principal {
 	 */
 	private static void defenderCombate(Combate combate, Enemigo enemigo) {
 		System.out.println("Vamos a defendernos.");
-		combate.defender(enemigo, clases.get(0));
-		System.out.println(
-				"Vida restante del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()) + "\n");
+		combate.defender(enemigo, clases.get(0), mpMax);
+		mostrarVidaMpPersonaje();
 		if (((Base) clases.get(0)).getVida() <= 0) {
 			System.out.println("Has perdido.");
 			exportarDatos();
@@ -316,6 +318,20 @@ public class Principal {
 		} // Del if
 		mostrarRepeticion();
 	} // Del defenderCombate
+
+	/**
+	 * Método que desarrolla el combate si eliges "Curar".
+	 * 
+	 * @param combate objeto que importas para poder utilizar los métodos de la
+	 *                clase combate.
+	 * @param enemigo enemigo con el que vas a combatir.
+	 */
+	private static void curarCombate(Combate combate, Enemigo enemigo) {
+		System.out.println("Vamos a curarnos.");
+		combate.curar(enemigo, clases.get(0), vidaMax);
+		mostrarVidaMpPersonaje();
+		mostrarRepeticion();
+	} // Del curarCombate
 
 	/**
 	 * Método por el cual el enemigo siempre atacará con el tipo de daño mas eficaz.
@@ -393,15 +409,7 @@ public class Principal {
 	 */
 	private static void exportarDatos() {
 		char respuesta;
-		pedirDatos();
-		io.escribir(datosJugador);
-		System.out.println("¿Quiere revisar el histórico de jugadores? (S/N)");
-		respuesta = sc.next().toUpperCase().charAt(0);
-		System.out.println();
-		if (respuesta == 'S') {
-			System.out.println("Se va a proceder a leer el archivo");
-			io.leer();
-		} // Del if
+		System.out.println("\n");
 		System.out.println(
 				" ::::::::      :::     ::::    ::::  ::::::::::       ::::::::  :::     ::: :::::::::: :::::::::  \r\n"
 						+ ":+:    :+:   :+: :+:   +:+:+: :+:+:+ :+:             :+:    :+: :+:     :+: :+:        :+:    :+: \r\n"
@@ -411,6 +419,15 @@ public class Principal {
 						+ "#+#    #+# #+#     #+# #+#       #+# #+#             #+#    #+#   #+#+#+#   #+#        #+#    #+# \r\n"
 						+ " ########  ###     ### ###       ### ##########       ########      ###     ########## ###    ### \r\n"
 						+ "\r\n" + "");
+		pedirDatos();
+		io.escribir(datosJugador);
+		System.out.println("¿Quiere revisar el histórico de jugadores? (S/N)");
+		respuesta = sc.next().toUpperCase().charAt(0);
+		System.out.println();
+		if (respuesta == 'S') {
+			System.out.println("Se va a proceder a leer el archivo");
+			io.leer();
+		} // Del if
 		sc.close();
 	} // Del exportarDatos
 
@@ -453,4 +470,22 @@ public class Principal {
 					+ "      |       _\\.:||:./_\r\n" + "      |      /____/\\____\\");
 		} // Del else
 	} // Del imprimirAscii
+
+	/**
+	 * Método que imprime dos String, uno con la vida y otro con los mp del
+	 * personaje.
+	 */
+	private static void mostrarVidaMpPersonaje() {
+		System.out.println("Vida del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getVida()));
+		System.out.println("Mp del personaje: " + mostrarDosDecimales(((Base) clases.get(0)).getMp()) + "\n");
+	} // Del mostrarVidaMpPersonaje
+
+	/**
+	 * Método que imprime dos String, uno con la vida y otro con los mp del enemigo.
+	 * 
+	 * @param enemigo Enemigo del cual queremos mostrar los datos.
+	 */
+	private static void mostrarVidaMpEnemigo(Enemigo enemigo) {
+		System.out.println("Vida del enemigo: " + mostrarDosDecimales(enemigo.getVida()) + "\n");
+	} // Del mostrarVidaMpEnemigo
 } // Del class

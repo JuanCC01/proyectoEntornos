@@ -22,3 +22,15 @@ Jugador: Juan	Número de rondas: 1
 	Personaje: Tanque [clase=Tanque, vida=-2.79, mp=12.5, ataque=11.5, defensa=12.5, magia=5.0, velocidad=2.55]
 Jugador: Juan	Número de rondas: 37
 	Personaje: Guerrero [clase=Guerrero, vida=1063.75, mp=693.75, ataque=499.5, defensa=370.0, magia=277.5, velocidad=3.0]
+Jugador: Prubea	Número de rondas: 1
+	Personaje: Tanque [clase=Tanque, vida=29.07, mp=12.5, ataque=11.5, defensa=12.5, magia=5.0, velocidad=2.55]
+Jugador: AAA	Número de rondas: 2
+	Personaje: Mago [clase=Mago, vida=50.0, mp=57.5, ataque=15.0, defensa=15.0, magia=27.0, velocidad=3.3]
+Jugador: fsfds	Número de rondas: 1
+	Personaje: Guerrero [clase=Guerrero, vida=20.81, mp=9.75, ataque=13.5, defensa=10.0, magia=7.5, velocidad=3.0]
+Jugador: aaa	Número de rondas: 1
+	Personaje: Guerrero [clase=Guerrero, vida=16.85, mp=11.75, ataque=13.5, defensa=10.0, magia=7.5, velocidad=3.0]
+Jugador: aaa	Número de rondas: 1
+	Personaje: Tanque [clase=Tanque, vida=14.9, mp=5.5, ataque=11.5, defensa=12.5, magia=5.0, velocidad=2.55]
+Jugador: 222	Número de rondas: 1
+	Personaje: Tanque [clase=Tanque, vida=19.92, mp=5.5, ataque=11.5, defensa=12.5, magia=5.0, velocidad=2.55]
