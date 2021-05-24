@@ -37,9 +37,17 @@ public class EntradaSalida {
 		try {
 			File fichero = new File("datosJugadores.txt");
 			Scanner leer = new Scanner(fichero);
+			int contadorLineas = 0, aux = 0;
 			while (leer.hasNextLine()) {
 				String datos = leer.nextLine();
-				System.out.println(datos);
+				aux++;
+				if (aux % 2 != 0) {
+					contadorLineas++;
+					System.out.print("Partida " + contadorLineas + ": ");
+				} // Del if
+				System.out.println("\t" + datos);
+				if (aux % 2 == 0)
+					System.out.print("\n");
 			} // Del while
 			leer.close();
 		} catch (FileNotFoundException e) {
