@@ -12,6 +12,9 @@ import java.util.*;
  */
 public class EntradaSalida {
 
+	private String nombreDirectorio = "records/";
+	private String nombreFichero = "datosJugadores";
+
 	/**
 	 * Clase que escribe el nombre del jugador, las rondas jugadas y el personaje
 	 * utilizado.
@@ -19,8 +22,12 @@ public class EntradaSalida {
 	 * @param aux String con los datos
 	 */
 	public void escribir(String aux) {
+		File directorio = new File(nombreDirectorio);
+		if (!directorio.exists())
+			directorio.mkdir();
+		File archivo = new File(nombreDirectorio + nombreFichero + ".txt");
 		try {
-			FileWriter escribir = new FileWriter("datosJugadores.txt", true);
+			FileWriter escribir = new FileWriter(archivo, true);
 			escribir.write(aux);
 			escribir.close();
 			System.out.println("Escrito correctamente.");
@@ -35,7 +42,7 @@ public class EntradaSalida {
 	 */
 	public void leer() {
 		try {
-			File fichero = new File("datosJugadores.txt");
+			File fichero = new File(nombreDirectorio + nombreFichero + ".txt");
 			Scanner leer = new Scanner(fichero);
 			int contadorLineas = 0, aux = 0;
 			while (leer.hasNextLine()) {

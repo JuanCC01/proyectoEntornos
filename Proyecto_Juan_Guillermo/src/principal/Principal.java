@@ -432,6 +432,7 @@ public class Principal {
 		if (respuesta == 'S') {
 			System.out.println("Se va a proceder a leer el archivo");
 			io.leer();
+			delaySegundos();
 		} // Del if
 		sc.close();
 	} // Del exportarDatos
@@ -493,4 +494,16 @@ public class Principal {
 	private static void mostrarVidaMpEnemigo(Enemigo enemigo) {
 		System.out.println("Vida del enemigo: " + mostrarDosDecimales(enemigo.getVida()) + "\n");
 	} // Del mostrarVidaMpEnemigo
+
+	/**
+	 * Método que duerme el proceso del programa durante 5s antes de que se cierre.
+	 */
+	private static void delaySegundos() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			System.out.println("Ha habido un problema.");
+			e.printStackTrace();
+		} // Del try-catch
+	} // Del delaySegundos
 } // Del class
