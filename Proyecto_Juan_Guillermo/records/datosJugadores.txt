@@ -6,3 +6,11 @@ Jugador: Guillermo	Número de rondas: 1
 	Personaje: Tanque [clase=Tanque, vida=-4.01, mp=12.5, ataque=11.5, defensa=12.5, magia=5.0, velocidad=2.55]
 Jugador: Juan	Número de rondas: 4
 	Personaje: Mago [clase=Mago, vida=-27.99, mp=115.0, ataque=30.0, defensa=30.0, magia=54.0, velocidad=3.3]
+Jugador: Prueba	Número de rondas: 1
+	Personaje: Mago [clase=Mago, vida=-5.28, mp=28.75, ataque=7.5, defensa=7.5, magia=13.5, velocidad=3.3]
+Jugador: Prueba	Número de rondas: 5
+	Personaje: Mago [clase=Mago, vida=-15.7, mp=143.75, ataque=37.5, defensa=37.5, magia=67.5, velocidad=3.3]
+Jugador: pureba1	Número de rondas: 1
+	Personaje: Mago [clase=Mago, vida=-5.04, mp=28.75, ataque=7.5, defensa=7.5, magia=13.5, velocidad=3.3]
+Jugador: 	Número de rondas: 1
+	Personaje: Mago [clase=Mago, vida=-21.03, mp=28.75, ataque=7.5, defensa=7.5, magia=13.5, velocidad=3.3]
