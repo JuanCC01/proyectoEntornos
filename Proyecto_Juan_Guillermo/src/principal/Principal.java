@@ -401,9 +401,9 @@ public class Principal {
 	 */
 	private static String pedirDatos() {
 		String nombre;
-		System.out.println("Escriba su nombre: ");
-		nombre = sc.next();
-		System.out.println();
+		System.out.print("Escriba su nombre: ");
+		sc.nextLine();
+		nombre = sc.nextLine();
 		return datosJugador = "Jugador: " + nombre + "\tNúmero de rondas: " + (contador) + "\n\tPersonaje: "
 				+ clases.get(0).toString() + "\n";
 	} // Del pedirDatos
